@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="outerClip">
+      <rect x="72" y="72" width="880" height="880" rx="188" ry="188"/>
+    </clipPath>
+  </defs>
+
+  <g id="Outer_Background">
+    <rect x="72" y="72" width="880" height="880" rx="188" ry="188" fill="#074d5a"/>
+  </g>
+
+  <g id="Signal_Panel">
+    <rect x="194" y="235" width="638" height="474" rx="108" ry="108" fill="#0a6c7b"/>
+  </g>
+
+  <g id="Signal_Bars" fill="#cefeff">
+    <rect x="305" y="530" width="80" height="103" rx="28" ry="28"/>
+    <rect x="406" y="470" width="81" height="163" rx="28" ry="28"/>
+    <rect x="508" y="401" width="82" height="232" rx="28" ry="28"/>
+    <rect x="614" y="322" width="82" height="311" rx="28" ry="28"/>
+  </g>
+
+  <g id="Popover_Panel" clip-path="url(#outerClip)">
+    <path d="
+      M 72,824
+      Q 104,760 194,760
+      L 460,760
+      L 512,714
+      L 564,760
+      L 830,760
+      Q 920,760 952,824
+      L 952,952
+      L 72,952
+      Z" fill="#0e7281"/>
+  </g>
+</svg>

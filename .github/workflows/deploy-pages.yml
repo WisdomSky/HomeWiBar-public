@@ -1,0 +1,84 @@
+# Builds this repository and publishes it to GitHub Pages.
+#
+# The repository root *is* the landing page, so every step runs from the checkout root — there is no
+# `pages/` prefix here. That is the one difference from the copy of this file in the app
+# repository's `.github/workflows/`, which builds this folder as a subdirectory.
+#
+# One-time setup: repository Settings → Pages → Build and deployment → Source: **GitHub Actions**.
+# Nothing else. The site URL is shown in the `deploy` job and in the Pages settings.
+name: Deploy landing page
+
+on:
+  push:
+    branches: [main]
+    # Only what the built site is made of. `HomeWiBar.zip` is deliberately absent: the download
+    # button points at raw.githubusercontent, so replacing the archive is a content change that
+    # needs no rebuild.
+    paths:
+      - 'src/**'
+      - 'screenshots/**'
+      - 'HomeWiBar-vector.svg'
+      - 'index.html'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'vite.config.ts'
+      - 'tsconfig.json'
+      - 'env.d.ts'
+      - '.github/workflows/deploy-pages.yml'
+  # Lets you redeploy after changing the download URL variable without touching a file.
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# One deploy at a time. `cancel-in-progress: false` so a queued deploy is never cut off mid-publish,
+# which can leave Pages serving a half-uploaded site.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Install
+        run: npm ci
+
+      - name: Build
+        # `npm run build` runs `vue-tsc --noEmit` first, so a type error fails the deploy rather than
+        # shipping a broken page.
+        #
+        # The download button's URL. Set it once in Settings → Secrets and variables → Actions →
+        # Variables as `VITE_DOWNLOAD_URL`; it is a public URL, so it is a variable and not a secret.
+        env:
+          VITE_DOWNLOAD_URL: ${{ vars.VITE_DOWNLOAD_URL }}
+        run: npm run build
+
+      # The asset base path is derived in `vite.config.ts` from the `GITHUB_REPOSITORY` Actions
+      # already exports — the root for a `<user>.github.io` repository, `/<repo>/` for everything
+      # else. Nothing here needs to know it.
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

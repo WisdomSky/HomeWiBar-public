@@ -1,0 +1,168 @@
+@import 'tailwindcss';
+
+/* The page is built from three colours, and only three:
+     #0F5354  the dark teal the desktop behind the screenshots is made of
+     #2AA4B3  its bright teal
+     #54BA96  its green
+   Everything else here is one of those three mixed toward white or black until it can carry text.
+   The shades are listed with their measured contrast against the surface they sit on, because a
+   mid-tone teal is easy to use in a way that looks right and cannot be read. */
+@theme {
+  /* #0F5354 taken down until #2AA4B3 reads as text on it (5.1:1) */
+  --color-void: #06292a; /* page */
+  --color-surface: #0f5354; /* the dark teal itself: wells, panels, the icon strip */
+  --color-line: #1c7c80; /* 3.1:1 on the page — the stronger rule */
+  --color-line-soft: #0f6669; /* 2.3:1 on the page, 1.3:1 on a surface — the quiet one */
+
+  --color-ink: #eaf7f7; /* 14.2:1 on the page, 8.6:1 on a surface */
+  --color-ink-dim: #a6d4d7; /* 9.4:1 / 5.5:1 */
+  --color-ink-faint: #7cb8bc; /* 6.8:1 / 4.0:1 — page only, never on a surface */
+
+  /* #2AA4B3 is a mid-tone: it works as a fill behind dark text and as text on the dark page,
+     but at 3.0:1 it must never be text on a #0F5354 surface. */
+  --color-signal: #2aa4b3;
+  --color-accent: #54ba96; /* 6.6:1 on the page */
+
+  --font-sans:
+    -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', 'Segoe UI', sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, monospace;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-void);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+    letter-spacing: -0.022em;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--color-signal) 35%, transparent);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-signal);
+    outline-offset: 3px;
+    border-radius: 3px;
+  }
+}
+
+@layer components {
+  .shell {
+    width: 100%;
+    max-width: 1180px;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+
+  /* Small uppercase mono label. Used for section numbers, captions and specs — the things that are
+     measurements rather than prose. */
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-ink-faint);
+  }
+
+  .mono {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* The screenshots are used exactly as they were taken — whole, uncropped. The radius rounds the
+     image's own outer edge; the app window sits well inside every capture, so nothing of the app is
+     ever clipped by it. */
+  .shot {
+    border: 1px solid var(--color-line);
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--color-surface);
+    box-shadow: 0 26px 50px -34px rgb(0 0 0 / 0.85);
+  }
+
+  .shot img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  /* A command to run. Mono, on a surface, with the copy button tucked into the corner. */
+  .cmd {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 0.75rem;
+    padding: 0.6rem 0.75rem;
+    border: 1px solid var(--color-line-soft);
+    border-radius: 8px;
+    background: var(--color-surface);
+  }
+
+  .cmd code {
+    flex: 1;
+    min-width: 0;
+    overflow-x: auto;
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    line-height: 1.5;
+    color: var(--color-ink);
+    white-space: pre;
+    scrollbar-width: none;
+  }
+
+  .cmd code::-webkit-scrollbar {
+    display: none;
+  }
+
+  .cmd button {
+    flex: none;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-ink-dim);
+    transition: color 0.15s;
+  }
+
+  .cmd button:hover {
+    color: var(--color-ink);
+  }
+
+  .bullet {
+    position: relative;
+    padding-left: 1.15rem;
+    color: var(--color-ink-dim);
+  }
+
+  .bullet::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 0.4rem;
+    height: 1px;
+    background: var(--color-signal);
+  }
+}
+
+strong {
+  color: #ffc000;
+}
