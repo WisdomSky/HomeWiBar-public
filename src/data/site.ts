@@ -57,8 +57,8 @@ export const features: Feature[] = [
       'So you can yell at someone for downloading very big files and wasting your precious data. :)',
     ],
     image: networkShot,
-    alt: 'The HomeWiBar panel on its Network tab: signal metrics, cell details and two throughput charts',
-    caption: 'Network tab · the panel is 322 × 496 pt',
+    alt: '',
+    caption: '',
     width: 882,
   },
   {
