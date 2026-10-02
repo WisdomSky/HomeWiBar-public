@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import DownloadButton from './DownloadButton.vue'
-import { features, live } from '../data/site'
+import { features } from '../data/site'
 
 const panel = features[0]
 </script>
