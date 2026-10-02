@@ -1,13 +1,16 @@
 <script setup lang="ts">
 import { downloadUrl } from '../data/site'
 
-withDefaults(defineProps<{ size?: 'lg' | 'md' }>(), { size: 'md' })
+withDefaults(defineProps<{
+  size?: 'lg' | 'md'
+  url?: string
+}>(), { size: 'md' })
 </script>
 
 <template>
   <a
-    v-if="downloadUrl"
-    :href="downloadUrl"
+    v-if="url || downloadUrl"
+    :href="url ?? downloadUrl"
     class="group inline-flex items-center gap-2.5 rounded-lg bg-signal px-5 font-medium text-void transition-colors hover:bg-[#6aa9fb]"
     :class="size === 'lg' ? 'h-12 text-[15px]' : 'h-10 text-sm'"
   >

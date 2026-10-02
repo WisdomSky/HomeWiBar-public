@@ -38,8 +38,18 @@ async function copy(text: string, index: number) {
         </div>
 
         <p class="mono mt-6 text-[12.5px] leading-relaxed text-ink-faint">
-          macOS 14 or later · Apple silicon · arm64 · ad-hoc signed
+          MacOS 14+ (Sonoma) · Apple M Series · Macbook Neo
         </p>
+
+        <h5 class="mt-10 text-[1rem] leading-tight font-semibold sm:text-[1.1rem]">
+          Known Supported Models
+        </h5>
+        <ul class="space-y-2 mono mt-2 text-[12.5px] leading-relaxed text-ink-faint">
+          <li class="bullet">Smart 5G Max Home WiFi</li>
+          <li class="bullet">Smart 5G Max Turbo WiFi</li>
+          <li class="bullet">PLDT Home WiFi 5G+</li>
+          <li class="bullet">Huawei 5G CPE 5s</li>
+        </ul>
       </div>
 
       <ol class="space-y-7">
@@ -66,6 +76,7 @@ async function copy(text: string, index: number) {
                 {{ copied === i ? 'copied' : 'copy' }}
               </button>
             </div>
+            <p v-if="!!step.foot" class="mt-0 mb-5 text-[14.5px] leading-relaxed text-ink-dim" v-html="step.foot"></p>
 
             <p v-if="step.note" class="mt-2 text-[13.5px] leading-relaxed text-ink-faint">
               {{ step.note }}

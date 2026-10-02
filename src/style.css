@@ -166,3 +166,12 @@
 strong {
   color: #ffc000;
 }
+
+em {
+  color: #48696c;
+}
+
+.logo {
+  width: 75px;
+  display: inline-block;
+}

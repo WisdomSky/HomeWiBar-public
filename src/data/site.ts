@@ -172,6 +172,8 @@ export interface InstallStep {
   body: string
   /** A command to run, shown in a terminal block with a copy button. */
   command?: string
+
+  foot?: string
   /** Shown under a command when the exact path depends on where the app was put. */
   note?: string
 }
@@ -187,9 +189,13 @@ export const installSteps: InstallStep[] = [
   },
   {
     title: 'Make sure to open it right the first time',
-    body: 'The build is ad-hoc signed, so macOS may refuse to open it the first time. What you need to do for the first time is find <strong>HomeWiBar.app</strong> inside your <strong>/Applications</strong> folder then right-click and choose "<strong>Open</strong>", then "Open" again in the dialog<br><br>...or clear the flag from Terminal:',
+    body: 'The build is ad-hoc signed, so macOS may refuse to open it the first time. What you need to do for the first ' +
+        'time is find <strong>HomeWiBar.app</strong> inside your <strong>/Applications</strong> folder then right-click ' +
+        'and choose "<strong>Open</strong>", then "Open" again in the dialog<br><br>' +
+        '...or if that didn\'t work, <strong>Open</strong> your Mac\'s built-in <strong>Terminal</strong> app and run the command below once:',
     command: 'xattr -dr com.apple.quarantine /Applications/HomeWiBar.app',
-    note: 'Once you opened it the first time using either of the instructions listed above, there\'s no need to follow this instruction to open it the next time. You can just double-click or open it from the Launchpad.',
+    foot: '<br>After that, open <strong>HomeWiBar</strong> again.',
+    note: 'Once you opened it the first time using either of the instructions listed above, there\'s no need to follow this instruction again the next time you open the app. You can just double-click or open it from the Launchpad.',
   },
   {
     title: 'Enter your Home WiFi\'s gateway access',

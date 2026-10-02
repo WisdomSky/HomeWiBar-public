@@ -12,32 +12,34 @@ const panel = features[0]
         <p class="eyebrow">macOS menu bar app · for the Huawei 4G/5G CPE</p>
 
         <h1 class="mt-5 text-[2.6rem] leading-[1.04] font-semibold sm:text-[3.25rem]">
-          Your router’s signal, in the menu bar.
+          <img src="./../../HomeWiBar-vector.svg" alt="HomeWiBar Logo" class="logo"> HomeWiBar
         </h1>
 
         <p class="mt-6 max-w-[34rem] text-[17px] leading-relaxed text-ink-dim">
-          A 5G router sits in the corner and tells you nothing. HomeWiBar signs in to it, reads the
-          signal once a second, and puts the number where you will actually see it — along with the
-          devices, the band locks and the texts it is holding.
+          A MacOS menubar application for managing supported <strong>Huawei H153-381 4G/5G CPE</strong>* directly and easily from your Mac.
+        </p>
+
+        <p>
+          <small><em>*or other 4G/5G CPE models with similar software that uses Huawei HiLink API.</em></small>
         </p>
 
         <div class="mt-8 flex flex-wrap items-center gap-3">
-          <DownloadButton size="lg" />
+          <DownloadButton size="lg" url="#install"/>
           <a
             href="#features"
             class="inline-flex h-12 items-center rounded-lg border border-line px-5 text-[15px] text-ink-dim transition-colors hover:border-ink-faint hover:text-ink"
           >
-            Learn more of its other features...
+            Tell me more...
           </a>
         </div>
 
         <!-- Not a mockup: this is what the app was reading on this machine while the page was
              written. -->
         <p class="mono mt-8 text-[12.5px] text-accent">
-          {{ live.rsrp }} · {{ live.rsrq }} · {{ live.sinr }} · {{ live.band }} ·
-          <span class="text-ink-dim">{{ live.quality }}</span>
+          Real-time Signal Status · LTE & 5G Band Locking · Uplink & Downlink Metrics · WiFI Settings ·
+          Text Messages · Device IP Address Binding · Client Device Blocking · Router Rebooting
         </p>
-        <p class="eyebrow mt-2">A live reading from the machine this was written on</p>
+        <p class="eyebrow mt-2"><strong>Huawei H153-381</strong> · Smart 5G Max Home WiFi · PLDT Home WiFi 5G+ · Huawei 5G CPE 5s</p>
       </div>
 
       <ul class="space-y-3 self-end text-[15px] leading-relaxed">
