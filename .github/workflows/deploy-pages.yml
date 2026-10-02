@@ -58,9 +58,17 @@ jobs:
         # `npm run build` runs `vue-tsc --noEmit` first, so a type error fails the deploy rather than
         # shipping a broken page.
         #
+        # `VITE_BASE=/` because the site is served from the *root* of a custom domain
+        # (homewibar.paodayag.dev). Without it `vite.config.ts` falls back to the project-site path
+        # derived from `GITHUB_REPOSITORY` — `/HomeWiBar-public/` — and every asset 404s on the custom
+        # domain: the HTML arrives, no CSS and no JS, and the page renders as an empty shell.
+        # Delete this line if the custom domain is ever dropped and the github.io path is canonical
+        # again.
+        #
         # The download button's URL. Set it once in Settings → Secrets and variables → Actions →
         # Variables as `VITE_DOWNLOAD_URL`; it is a public URL, so it is a variable and not a secret.
         env:
+          VITE_BASE: /
           VITE_DOWNLOAD_URL: ${{ vars.VITE_DOWNLOAD_URL }}
         run: npm run build
 
